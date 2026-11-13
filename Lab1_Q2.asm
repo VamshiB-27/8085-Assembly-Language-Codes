@@ -1,0 +1,12 @@
+LDA 7502H
+MOV B,A
+LDA 7501H
+SUB B
+STA 7503H
+
+JNC End
+; For borrow storing
+MVI A,01H
+STA 7504H
+
+End: HLT

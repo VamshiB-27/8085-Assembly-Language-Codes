@@ -1,0 +1,45 @@
+#BEGIN 2000H
+#ORG 003CH
+CALL RST7_5_ISR
+EI
+RET
+
+#ORG 2000H
+
+; Initize Stack pointer
+LXI SP,5000H
+
+; Interrupt
+MVI A,00001011B
+SIM
+EI
+
+; Initizing A,B(for +1) For BCD Inc
+MVI A,00H
+MVI B,01H
+
+Main: ADD B
+DAA
+OUT 01H
+JMP Main
+
+#ORG 6000H
+RST7_5_ISR: 
+
+PUSH PSW
+
+; No of blinks
+MVI C,05H
+
+Loop:
+;Output blink
+MVI A,FFH
+OUT 02H
+MVI A,00H
+OUT 02H
+DCR C
+JNZ Loop
+
+POP PSW
+
+RET

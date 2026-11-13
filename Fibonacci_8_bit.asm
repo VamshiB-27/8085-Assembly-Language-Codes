@@ -1,0 +1,28 @@
+LDA 2500H
+ORA A
+JZ End
+
+MOV D,A
+
+LXI H,2501H
+MVI A,01H
+MOV M,A
+DCR D
+JZ End
+INX H
+MOV M,A
+DCR D
+JZ End
+
+MOV B,A
+MOV C,A
+
+Loop: INX H
+ADD C
+MOV M,A
+MOV C,B
+MOV B,A
+DCR D
+JNZ Loop
+
+End: HLT

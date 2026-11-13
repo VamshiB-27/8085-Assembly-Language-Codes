@@ -1,0 +1,15 @@
+#BEGIN 1000H
+#ORG 1000H
+
+LDA 7501H
+MOV B,A
+LDA 7502H
+ADD B
+STA 7503H
+ 
+;  For Carry if added value is more than 8 bit's
+MVI A,00H
+ACI 00H
+STA 7504H
+
+HLT
